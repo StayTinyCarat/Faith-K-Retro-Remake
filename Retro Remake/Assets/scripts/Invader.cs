@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Invader : MonoBehaviour
 {
+    
     public System.Action killed;
 
     private void OnTriggerEnter2D(Collider2D other)

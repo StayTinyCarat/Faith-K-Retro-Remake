@@ -10,12 +10,7 @@ public class Invaders : MonoBehaviour
 
     public int columns = 11;
 
-    public AnimationCurve speed;
-
-    public int amountKilled {  get; private set; }
-    public int totalInvaders => this.rows * this.columns;
-
-    public float precentKilled => (float)this.amountKilled / (float)this.totalInvaders;
+    public float speed = 10.0f;
 
     private Vector3 _direction = Vector2.right;
 
@@ -31,7 +26,6 @@ public class Invaders : MonoBehaviour
             for(int col = 0; col < columns; col++)
             {
                 Invader invader= Instantiate(this.prefabs[row], this.transform);
-                invader.killed += InvaderKilled;
                 Vector3 position = rowPositon;
                 position.x += col * 2.0f;
                 invader.transform.localPosition = position;
@@ -42,7 +36,7 @@ public class Invaders : MonoBehaviour
 
     private void Update()
     {
-        this.transform.position += _direction * this.speed.Evaluate(this.precentKilled) * Time.deltaTime;
+        this.transform.position += _direction * this.speed * Time.deltaTime;
 
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
         Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
@@ -67,11 +61,6 @@ public class Invaders : MonoBehaviour
         Vector3 position = this.transform.position;
         position.y -= 1.0f;
         this.transform.position = position;
-    }
-
-    private void InvaderKilled()
-    { 
-
     }
 
 }
